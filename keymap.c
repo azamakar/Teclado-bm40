@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * 
  * TD0 --> "KC_LSFT" (1 tap and/or hold), otherwise "KC_CAPS" (2 tap rapidly)
  * TD1 --> "KC_SPC" (1 tap and/or hold), otherwise "KC_ENT" (2 tap rapidly)
- * TABNUM --> Tap once for "KC_TAB", hold for _NUM
+ * TABNUM --> Tap once for "KC_TAB", hold for _NUM layer
  */
 
 [_QWERTY] = LAYOUT_planck_mit(
