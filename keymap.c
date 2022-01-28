@@ -155,3 +155,49 @@ uint32_t layer_state_set_user(uint32_t state) {
   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
+// Setting ADJUST layer RGB back to default
+void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
+    if (IS_LAYER_ON(layer1) && IS_LAYER_ON(layer2)) {
+        layer_on(layer3);
+    } else {
+        layer_off(layer3);
+    }
+}
+
+void rgb_matrix_indicators_user(void)
+{
+#ifdef RGB_MATRIX_ENABLE
+  switch (biton32(layer_state))
+  {
+  case _RAISE:
+    for (int i = 0; i < DRIVER_LED_TOTAL; i++)
+    {
+      rgb_matrix_set_color(i, 255, 0, 0);
+    }
+    break;
+
+  case _LOWER:
+    for (int i = 0; i < DRIVER_LED_TOTAL; i++)
+    {
+      rgb_matrix_set_color(i, 0, 0, 255);
+    }
+    break;
+
+  case _ADJUST:
+      for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
+          rgb_matrix_set_color(i, 0, 255,0);
+      }
+      break;
+
+  default:
+    if (host_keyboard_leds() & (1 << USB_LED_CAPS_LOCK))
+    {
+      for (int i = 0; i < 24; i++)
+      {
+        rgb_matrix_set_color(i, 255, 255, 0);
+      }
+    }
+    break;
+  }
+#endif
+}
